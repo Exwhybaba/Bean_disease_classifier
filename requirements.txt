@@ -4,4 +4,3 @@ mesa
 numpy==1.19.5
 requests==2.26.0
 tensorflow>=2.5.0
-tensorflow.keras>=2.5.0
