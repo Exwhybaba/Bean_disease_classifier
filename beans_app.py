@@ -24,8 +24,15 @@ else:
 
 # Load the encoder
 encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav"
-with requests.get(encoder_path) as encoder_response:
-    encoder = pickle.loads(encoder_response.content)
+encoder_response = requests.get(encoder_path)
+
+# Check if the response is successful before unpickling
+if encoder_response.status_code == 200:
+    # Load the encoder from the binary stream
+    encoder_binary = io.BytesIO(encoder_response.content)
+    encoder = pickle.load(encoder_binary)
+else:
+    st.error(f"Failed to download the encoder file. Status code: {encoder_response.status_code}")
 
 # Descriptions for different predictions
 descriptions = {
