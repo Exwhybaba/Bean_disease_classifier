@@ -6,6 +6,7 @@ import cv2
 from tensorflow.keras.models import load_model
 import base64
 
+
 # Load the model
 model_path = r"C:\Users\Administrator\Documents\Sandbox\pytouch\Bean\Imagemodel.h5"
 encoder_path = r"C:\Users\Administrator\Documents\Sandbox\pytouch\Bean\encoder.sav"
@@ -30,7 +31,8 @@ def classifier(image):
     predictor = loaded_model.predict(rescaling, verbose=0)
     predicted_class = np.argmax(predictor, axis=1)
     predict = encoder.inverse_transform(predicted_class)
-    return predict[0]
+    confidence = np.max(predictor) * 100  # Confidence as a percentage
+    return predict[0], confidence
 
 def encode_image_as_base64(image_path):
     with open(image_path, "rb") as image_file:
@@ -41,26 +43,14 @@ def main():
     # Set page configuration
     st.set_page_config(page_title="Bean Disease Detector", page_icon=":seedling:", layout="wide")
 
-    # Custom CSS styles
-    st.markdown("""
-        <style>
-            body {
-                background-color: #f4f4f4;
-                margin-top: -60px; 
-                margin-bottom: 100px; /* Adjust the margin-bottom value as needed */
-            }
-            .st-bc {
-                color: #333333;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+
 
     # Background image using custom CSS
     st.markdown(
         f"""
         <style>
             .stApp {{
-                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('C:/Users/Administrator/Documents/Sandbox/pytouch/Bean/cowpea2.jpg')}");  
+                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('C:/Users/Administrator/Documents/Sandbox/pytouch/Bean/images/cowpea2.jpg')}");  
                 background-size: cover;
             }}
         </style>
@@ -84,18 +74,32 @@ def main():
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
         # Display image and classification
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([3, 1]) 
         with col1:
-            st.image(image_rgb, caption="Uploaded Image.", use_column_width=True)
-
+            
+            st.image(image_rgb, caption="Uploaded Image.", use_column_width=True, width = 100)
+           
         with col2:
+            st.markdown(
+                f"""
+                <style>
+                    .stApp {{
+                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('C:/Users/Administrator/Documents/Sandbox/pytouch/Bean/images/mossgreen.jpg')}");  
+                        background-size: cover;
+                    }}
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+            
             with st.spinner("Detecting..."):
-                prediction = classifier(image)
-            st.success(f"Detection: {prediction}")
+                prediction, confidence = classifier(image)
+            st.success(f"Detection: {prediction} (Accuracy: {confidence:.2f}%)")
             
             # Display dynamic description based on prediction
             if prediction in descriptions:
                 st.markdown(f"### Description:\n{descriptions[prediction]}")
+
 
     # Copyright notice
     st.markdown(
