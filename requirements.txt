@@ -3,5 +3,5 @@ mesa
 numpy==1.19.3
 streamlit==0.80.0
 Pillow==9.5.0
-keras==2.12.0
+keras==2.6.0rc0
 tensorflow==2.6.0rc0
