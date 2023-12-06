@@ -11,39 +11,22 @@ import base64
 model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-# Function to load the model from URL
-def load_model_from_url(url, local_path):
-    response = requests.get(url)
-    if response.status_code == 200:
-        # Save the model file locally
-        with open(local_path, 'wb') as f:
-            f.write(response.content)
+# Download the model file
+response = requests.get(model_url)
+model_content = response.content
 
-        # Load the model from the local file
-        loaded_model = tf.keras.models.load_model(local_path)
-        return loaded_model
-    else:
-        st.error(f"Failed to download the model file. Status code: {response.status_code}")
-        return None
-
-# Local path to save the model file
-local_model_path = 'Imagemodel.h5'
-
-# Load the model from the URL and save it locally
-loaded_model = load_model_from_url(model_url, local_model_path)
+#loaded model
+loaded_model = tf.keras.models.load_model(model_content )
 
 
-# Function to load the encoder from URL
-def load_encoder_from_url(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        # Load the encoder from the binary stream
-        encoder_binary = io.BytesIO(response.content)
-        encoder = pickle.load(encoder_binary)
-        return encoder
-    else:
-        st.error(f"Failed to download the encoder file. Status code: {response.status_code}")
-        return None
+
+
+# Download the encoder file
+response = requests.get(encoder_url)
+encoder_content = response.content
+
+# Load the model and transformers
+encoder = pickle.loads(encoder_content)
 
 # Function to classify an image
 def classifier(image, loaded_model, encoder):
