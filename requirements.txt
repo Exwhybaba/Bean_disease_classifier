@@ -1,4 +1,4 @@
-opencv-python==4.5.1.48
+opencv-python-headless
 mesa
 numpy==1.19.3
 streamlit==0.80.0
