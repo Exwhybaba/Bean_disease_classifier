@@ -11,15 +11,12 @@ from tensorflow.keras.models import load_model
 
 
 # Load the model URL
-model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.h5'
+model_url = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5"
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-# Download the model file
+
 response = requests.get(model_url)
 model_content = response.content
-
-
-# Load the model
 loaded_model = tf.keras.models.load_model(io.BytesIO(model_content))
 
 
