@@ -12,16 +12,26 @@ model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifie
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
 # Function to load the model from URL
-def load_model_from_url(url):
+def load_model_from_url(url, local_path):
     response = requests.get(url)
     if response.status_code == 200:
-        # Load the model from the binary stream
-        model_binary = io.BytesIO(response.content)
-        loaded_model = tf.keras.models.model_from_config(tf.keras.models.load_model(model_binary).get_config())
+        # Save the model file locally
+        with open(local_path, 'wb') as f:
+            f.write(response.content)
+
+        # Load the model from the local file
+        loaded_model = tf.keras.models.load_model(local_path)
         return loaded_model
     else:
         st.error(f"Failed to download the model file. Status code: {response.status_code}")
         return None
+
+# Local path to save the model file
+local_model_path = 'Imagemodel.h5'
+
+# Load the model from the URL and save it locally
+loaded_model = load_model_from_url(model_url, local_model_path)
+
 
 # Function to load the encoder from URL
 def load_encoder_from_url(url):
