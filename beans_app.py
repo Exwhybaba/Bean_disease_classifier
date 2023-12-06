@@ -13,7 +13,7 @@ from tensorflow.keras.models import load_model
 
 
 # Load the model using tf.keras.models.load_model
-loaded_model = load_model(model/Imagemode.h5)
+loaded_model = load_model("model/Imagemodel.h5")
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
