@@ -5,15 +5,28 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import base64
 from PIL import Image
+import requests
+
+# Load the model from the local file
+model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/Imagemodel.h5'
+model_response = requests.get(model_url)
+
+# Check if the response is successful before writing to the file
+if model_response.status_code == 200:
+    model_path = "./model/Imagemodel.h5"
+    with open(model_path, "wb") as model_file:
+        model_file.write(model_response.content)
+else:
+    st.error(f"Failed to download the model file. Status code: {model_response.status_code}")
+    st.stop()
 
 # Load the model
-model_path = 'https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/Imagemodel.h5'
-encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/encoder.sav"
 loaded_model = load_model(model_path)
 
 # Load the encoder
-with open(encoder_path, 'rb') as file:
-    encoder = pickle.load(file)
+encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/encoder.sav"
+with requests.get(encoder_path) as encoder_response:
+    encoder = pickle.loads(encoder_response.content)
 
 # Descriptions for different predictions
 descriptions = {
@@ -91,5 +104,18 @@ def main():
                 prediction, confidence = classifier(image_bgr)
             st.success(f"Detection: {prediction} (Accuracy: {confidence:.2f}%)")
 
-    
-           
+            # Display dynamic description based on prediction
+            if prediction in descriptions:
+                st.markdown(f"### Description:\n{descriptions[prediction]}")
+
+    # Copyright notice
+    st.markdown(
+        """
+        ---
+        © 2023 Oyelayo Seye. All rights reserved.
+        """,
+        unsafe_allow_html=True,
+    )
+
+if __name__ == "__main__":
+    main()
