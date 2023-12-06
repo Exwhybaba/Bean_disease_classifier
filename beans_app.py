@@ -8,8 +8,8 @@ import base64
 
 
 # Load the model
-model_path = r"C:\Users\Administrator\Documents\Sandbox\pytouch\Bean\Imagemodel.h5"
-encoder_path = r"C:\Users\Administrator\Documents\Sandbox\pytouch\Bean\encoder.sav"
+model_path = 'https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/Imagemodel.h5'
+encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/encoder.sav"
 loaded_model = load_model(model_path)
 
 # Load the encoder
