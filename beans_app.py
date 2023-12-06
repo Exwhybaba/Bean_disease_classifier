@@ -3,20 +3,40 @@ import io
 import pickle
 import numpy as np
 import cv2
-from tensorflow.keras.models import load_model
+import requests
+import tensorflow as tf
 import base64
 
-
-# Load the model
+# Load the model URL
 model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.hdf5'
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-loaded_model = load_model(model_url)
+# Function to download and load the model
+def load_model_from_url(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Check for errors
+        model_binary = io.BytesIO(response.content)
+        loaded_model = tf.keras.models.load_model(model_binary)
+        return loaded_model
+    except Exception as e:
+        st.error(f"Failed to download and load the model. Error: {e}")
+        return None
 
-# Load the encoder
-with open(encoder_path, 'rb') as file:
-    encoder = pickle.load(file)
-    
+# Function to load the encoder from URL
+def load_encoder_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        encoder_binary = io.BytesIO(response.content)
+        encoder = pickle.load(encoder_binary)
+        return encoder
+    else:
+        st.error(f"Failed to download the encoder file. Status code: {response.status_code}")
+        return None
+
+# Load the model and encoder
+loaded_model = load_model_from_url(model_url)
+encoder = load_encoder_from_url(encoder_url)
     
 # Descriptions for different predictions
 descriptions = {
