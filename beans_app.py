@@ -6,7 +6,7 @@ import cv2
 import requests
 import tensorflow as tf
 import base64
-import h5py
+import tempfile
 from tensorflow.keras.models import load_model
 
 
@@ -17,10 +17,17 @@ encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classif
 
 response = requests.get(model_url)
 model_content = response.content
+
+
 # Save the model content to a temporary file
-model_path = "temp_model.h5"
-with open(model_path, "wb") as model_file:
-    model_file.write(model_content)
+with tempfile.NamedTemporaryFile(delete=False, suffix=".h5") as temp_model_file:
+    temp_model_file.write(model_content)
+    model_path = temp_model_file.name
+
+# Load the model
+loaded_model = tf.keras.models.load_model(model_path)
+
+
 
 # Load the model
 loaded_model = tf.keras.models.load_model(model_path)
