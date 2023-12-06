@@ -1,9 +1,3 @@
-#Upgrade pip
-python -m pip install --upgrade pip
-
-#Install dependencies
-python -m pip install -r requirements.txt
-
 import streamlit as st
 import io
 import pickle
