@@ -7,19 +7,16 @@ import requests
 import tensorflow as tf
 import base64
 import tempfile
+import subprocess
 from tensorflow.keras.models import load_model
 
-#Load the model 
-model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/model/Imagemodel.h5'
 
-# Download the model locally
-local_model_path = tempfile.NamedTemporaryFile(delete=False).name
-response = requests.get(model_url)
-with open(local_model_path, 'wb') as model_file:
-    model_file.write(response.content)
+model_path = 'model.h5'
 
-# Load the model using tf.keras.models.load_model
-loaded_model = load_model(local_model_path)
+if not os.path.isfile(model_path):
+    subprocess.run(['curl', '--output', model_path, 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/Imagemodel.h5'], check=True, shell=True)
+
+loaded_model = tf.keras.models.load_model(model_path, compile=False)
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
