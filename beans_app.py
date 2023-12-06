@@ -6,27 +6,37 @@ import cv2
 import requests
 import tensorflow as tf
 import base64
+from urllib.request import urlopen
 
-# Load the model and encoder URLs
-model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
+# GitHub raw file URL for the model
+model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.h5'
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-# Download the model file
-response = requests.get(model_url)
-model_content = response.content
+# Function to load the model from URL
+def load_model_from_url(url):
+    try:
+        # Download the model file
+        with urlopen(url) as response:
+            model_binary = io.BytesIO(response.read())
+        
+        # Load the model using tf.keras
+        loaded_model = tf.keras.models.load_model(model_binary)
+        return loaded_model
+    except Exception as e:
+        st.error(f"Failed to download and load the model. Error: {e}")
+        return None
 
-#loaded model
-loaded_model = tf.keras.models.load_model(model_content )
-
-
-
-
-# Download the encoder file
-response = requests.get(encoder_url)
-encoder_content = response.content
-
-# Load the model and transformers
-encoder = pickle.loads(encoder_content)
+# Function to load the encoder from URL
+def load_encoder_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        # Load the encoder from the binary stream
+        encoder_binary = io.BytesIO(response.content)
+        encoder = pickle.load(encoder_binary)
+        return encoder
+    else:
+        st.error(f"Failed to download the encoder file. Status code: {response.status_code}")
+        return None
 
 # Function to classify an image
 def classifier(image, loaded_model, encoder):
@@ -43,25 +53,15 @@ def classifier(image, loaded_model, encoder):
 
     return predicted_label, confidence
 
-# Function to encode image as base64
-def encode_image_as_base64(image_path):
-    with open(image_path, "rb") as image_file:
-        encoded_image = base64.b64encode(image_file.read()).decode()
-    return encoded_image
+# Local path to save the model file
+local_model_path = 'Imagemodel.h5'
 
-# Main function
-def main():
-    # Set page configuration
-    st.set_page_config(page_title="Bean Disease Detector", page_icon=":seedling:", layout="wide")
+# Load the model from the URL
+loaded_model = load_model_from_url(model_url)
+encoder = load_encoder_from_url(encoder_url)
 
-    # Load the model and encoder
-    loaded_model = load_model_from_url(model_url)
-    encoder = load_encoder_from_url(encoder_url)
-
-    # Check if loading was successful
-    if loaded_model is None or encoder is None:
-        return
-
+# Check if loading was successful
+if loaded_model is not None and encoder is not None:
     # Your Streamlit app code...
     st.title("Bean Disease Detector")
     st.markdown("## Upload an image.")
@@ -77,7 +77,3 @@ def main():
 
         # Example: Display image
         st.image(image, caption="Uploaded Image.", use_column_width=True)
-        
-
-if __name__ == "__main__":
-    main()
