@@ -8,28 +8,11 @@ import tensorflow as tf
 import base64
 import tempfile
 from tensorflow.keras.models import load_model
-import h5py
 
 
-# Load the model URL
-model_url = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5"
-encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-
-# Download the model file
-response = requests.get(model_url)
-model_content = response.content
-
-# Save the model content to a temporary file
-with tempfile.NamedTemporaryFile(delete=False, suffix=".h5") as temp_model_file:
-    temp_model_file.write(model_content)
-    model_path = temp_model_file.name
-
-# Load the model using h5py
-with h5py.File(model_path, 'r') as model_h5:
-    loaded_model = tf.keras.models.load_model(model_h5)
-
-
+loaded_model = load_model("model/imagemodel.h5")
+encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
 response = requests.get(encoder_url)
 encoder_content = response.content
