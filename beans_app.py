@@ -6,24 +6,24 @@ import cv2
 import requests
 import tensorflow as tf
 import base64
-from urllib.request import urlopen
 
 # GitHub raw file URL for the model
 model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.hdf5'
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-# Function to load the model from URL
-def load_model_from_url(url):
-    try:
-        # Download the model file
-        with urlopen(url) as response:
-            model_binary = io.BytesIO(response.read())
-        
-        # Load the model using tf.keras
-        loaded_model = tf.keras.models.load_model(model_binary)
+# Function to load the model from URL and save it locally
+def load_model_from_url(url, local_path):
+    response = requests.get(url)
+    if response.status_code == 200:
+        # Save the model file locally
+        with open(local_path, 'wb') as f:
+            f.write(response.content)
+
+        # Load the model from the local file
+        loaded_model = tf.keras.models.load_model(local_path)
         return loaded_model
-    except Exception as e:
-        st.error(f"Failed to download and load the model. Error: {e}")
+    else:
+        st.error(f"Failed to download the model file. Status code: {response.status_code}")
         return None
 
 # Function to load the encoder from URL
@@ -56,8 +56,8 @@ def classifier(image, loaded_model, encoder):
 # Local path to save the model file
 local_model_path = 'Imagemodel.h5'
 
-# Load the model from the URL
-loaded_model = load_model_from_url(model_url)
+# Load the model from the URL and save it locally
+loaded_model = load_model_from_url(model_url, local_model_path)
 encoder = load_encoder_from_url(encoder_url)
 
 # Check if loading was successful
