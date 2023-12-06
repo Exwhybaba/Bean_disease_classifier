@@ -8,7 +8,7 @@ from PIL import Image
 import requests
 
 # Load the model from the local file
-model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/Imagemodel.h5'
+model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
 model_response = requests.get(model_url)
 
 # Check if the response is successful before writing to the file
@@ -24,7 +24,7 @@ else:
 loaded_model = load_model(model_path)
 
 # Load the encoder
-encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_classifier/main/encoder.sav"
+encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav"
 with requests.get(encoder_path) as encoder_response:
     encoder = pickle.loads(encoder_response.content)
 
