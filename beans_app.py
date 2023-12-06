@@ -20,10 +20,10 @@ encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classif
 response = requests.get(model_url)
 model_content = response.content
 
-# Save the model content to a file
-model_path = "temp_model.h5"
-with open(model_path, "wb") as model_file:
-    model_file.write(model_content)
+# Save the model content to a temporary file
+with tempfile.NamedTemporaryFile(delete=False, suffix=".h5") as temp_model_file:
+    temp_model_file.write(model_content)
+    model_path = temp_model_file.name
 
 # Load the model using h5py
 with h5py.File(model_path, 'r') as model_h5:
