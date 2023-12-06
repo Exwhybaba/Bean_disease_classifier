@@ -11,7 +11,7 @@ from tensorflow.keras.models import load_model
 
 
 
-loaded_model = load_model("model/imagemodel.h5")
+loaded_model = load_model("model/Imagemodel.h5")
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
 response = requests.get(encoder_url)
