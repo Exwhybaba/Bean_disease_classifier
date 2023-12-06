@@ -18,8 +18,10 @@ encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classif
 response = requests.get(model_url)
 model_content = response.content
 
+
 # Load the model
-loaded_model = tf.keras.models.model_from_config(tf.keras.models.load_model(io.BytesIO(model_content)).get_config())
+loaded_model = tf.keras.models.load_model(io.BytesIO(model_content))
+
 
 # Download the encoder file
 response = requests.get(encoder_url)
