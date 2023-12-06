@@ -84,6 +84,7 @@ def main():
 
         # Example: Display image
         st.image(image, caption="Uploaded Image.", use_column_width=True)
+        
 
 if __name__ == "__main__":
     main()
