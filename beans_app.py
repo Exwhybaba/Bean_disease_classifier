@@ -19,14 +19,15 @@ response = requests.get(model_url)
 model_content = response.content
 
 # Load the model
-loaded_model = load_model(model_content)
+loaded_model = tf.keras.models.model_from_config(tf.keras.models.load_model(io.BytesIO(model_content)).get_config())
 
 # Download the encoder file
 response = requests.get(encoder_url)
 encoder_content = response.content
 
-# Load the model and transformers
+# Load the encoder
 encoder = pickle.loads(encoder_content)
+
 
     
 # Descriptions for different predictions
