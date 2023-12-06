@@ -3,5 +3,5 @@ opencv-python-headless
 mesa
 numpy==1.19.5
 requests==2.26.0
-tensorflow==2.5.1
-tensorflow.keras==2.5.1
+tensorflow==2.5.0rc1
+tensorflow.keras==2.5.0rc1
