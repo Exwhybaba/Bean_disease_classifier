@@ -11,7 +11,7 @@ import base64
 model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.hdf5'
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
-loaded_model = load_model(model_path)
+loaded_model = load_model(model_url)
 
 # Load the encoder
 with open(encoder_path, 'rb') as file:
