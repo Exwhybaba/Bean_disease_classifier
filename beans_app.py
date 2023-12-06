@@ -19,7 +19,8 @@ if response.status_code == 200:
     model_binary = io.BytesIO(response.content)
     loaded_model = tf.keras.models.model_from_config(tf.keras.models.load_model(model_binary).get_config())
 else:
-    st.error("Failed to download the model file. Status code:", response.status_code)
+    st.error(f"Failed to download the model file. Status code: {response.status_code}")
+
 
 # Load the encoder
 encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav"
