@@ -1,6 +1,5 @@
 import streamlit as st
 import io
-import os
 import pickle
 import numpy as np
 import cv2
@@ -8,23 +7,13 @@ import requests
 import tensorflow as tf
 import base64
 import tempfile
-import subprocess
 from tensorflow.keras.models import load_model
 
 
-# Specify the URL of the model
-model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/model/Imagemodel.h5'
 
-# Download the model using requests
-response = requests.get(model_url)
-
-# Save the model locally
-local_model_path = 'model.h5'
-with open(local_model_path, 'wb') as model_file:
-    model_file.write(response.content)
 
 # Load the model using tf.keras.models.load_model
-loaded_model = tf.keras.models.load_model(local_model_path)
+loaded_model = load_model(model/Imagemode.h5)
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
