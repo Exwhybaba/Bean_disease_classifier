@@ -1,8 +1,7 @@
-
- Upgrade pip
+#Upgrade pip
 python -m pip install --upgrade pip
 
-# Install dependencies
+#Install dependencies
 python -m pip install -r requirements.txt
 
 import streamlit as st
