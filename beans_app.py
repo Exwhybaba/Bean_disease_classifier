@@ -54,7 +54,7 @@ def classifier(image, loaded_model, encoder):
     return predicted_label, confidence
 
 # Local path to save the model file
-local_model_path = 'Imagemodel.h5'
+local_model_path = 'Imagemodel.hdf5'
 
 # Load the model from the URL and save it locally
 loaded_model = load_model_from_url(model_url, local_model_path)
