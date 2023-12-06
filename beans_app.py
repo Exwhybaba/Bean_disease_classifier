@@ -7,11 +7,19 @@ import base64
 from PIL import Image
 import requests
 
-# Load the model from the local file
-model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
+# GitHub raw content URL for the model
+model_url = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5"
 
-# Load the model
-loaded_model = load_model(model_url)
+# Download the model file as a binary stream
+response = requests.get(model_url, stream=True)
+
+# Check if the response is successful
+if response.status_code == 200:
+    # Load the model from the binary stream
+    model_binary = io.BytesIO(response.content)
+    loaded_model = tf.keras.models.model_from_config(tf.keras.models.load_model(model_binary).get_config())
+else:
+    st.error("Failed to download the model file. Status code:", response.status_code)
 
 # Load the encoder
 encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav"
