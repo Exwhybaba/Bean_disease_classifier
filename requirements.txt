@@ -1,6 +1,6 @@
 opencv-python==4.5.1.48
 mesa
-numpy==1.23.5
+numpy==1.19.3
 streamlit==0.80.0
 Pillow==9.5.0
 keras==2.12.0
