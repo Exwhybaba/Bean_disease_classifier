@@ -1,6 +1,6 @@
 opencv-python-headless
 mesa
-numpy==1.19.3
+numpy==1.18.5
 streamlit==0.80.0
 Pillow==9.5.0
 keras==2.6.0rc0
