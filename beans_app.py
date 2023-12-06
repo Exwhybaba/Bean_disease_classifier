@@ -9,8 +9,9 @@ import base64
 import tempfile
 from tensorflow.keras.models import load_model
 
-
-loaded_model = load_model("model/Imagemodel.h5")
+#Load the model 
+model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/model/Imagemodel.h5'
+loaded_model = load_model(model_url)
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
