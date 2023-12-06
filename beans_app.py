@@ -9,7 +9,7 @@ import base64
 from urllib.request import urlopen
 
 # GitHub raw file URL for the model
-model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.h5'
+model_url = 'https://github.com/Exwhybaba/Bean_disease_classifier/raw/main/Imagemodel.hdf5'
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav'
 
 # Function to load the model from URL
