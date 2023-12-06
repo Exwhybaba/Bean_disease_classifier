@@ -9,19 +9,9 @@ import requests
 
 # Load the model from the local file
 model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
-model_response = requests.get(model_url)
-
-# Check if the response is successful before writing to the file
-if model_response.status_code == 200:
-    model_path = "./model/Imagemodel.h5"
-    with open(model_path, "wb") as model_file:
-        model_file.write(model_response.content)
-else:
-    st.error(f"Failed to download the model file. Status code: {model_response.status_code}")
-    st.stop()
 
 # Load the model
-loaded_model = load_model(model_path)
+loaded_model = load_model(model_url)
 
 # Load the encoder
 encoder_path = "https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/encoder.sav"
