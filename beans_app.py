@@ -76,20 +76,22 @@ def main():
     )
 
 
-    # Apply white color to the file uploader label using CSS
+    # Apply white color to the file uploader label text using CSS
     st.markdown(
         """
         <style>
             .css-qrbaxs {
                 color: white !important;
+                display: block;
             }
         </style>
         """,
         unsafe_allow_html=True
     )
     
-    # File uploader label with white color
+    # File uploader label text with white color
     uploaded_file = st.file_uploader("<label class='css-qrbaxs effi0qh3'>Choose an image...</label>", type=["jpg", "jpeg", "png"], key="file_uploader")
+    
 
 
 
