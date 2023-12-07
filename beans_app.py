@@ -3,11 +3,10 @@ import io
 import pickle
 import numpy as np
 import cv2
-import requests
-import tensorflow as tf
 import base64
 from tensorflow.keras.models import load_model
 
+# Load the trained model
 loaded_model = load_model('Imagemodel.h5', compile=False)
 
 # Load the encoder
@@ -22,9 +21,12 @@ descriptions = {
 }
 
 def classifier(image):
+    # Preprocess the image for prediction
     resize = cv2.resize(image, (150, 150))
     rescaling = resize / 255.0
     rescaling = rescaling.reshape((1, 150, 150, 3))
+    
+    # Make predictions using the loaded model
     predictor = loaded_model.predict(rescaling, verbose=0)
     predicted_class = np.argmax(predictor, axis=1)
     predict = encoder.inverse_transform(predicted_class)
@@ -40,14 +42,14 @@ def main():
     # Set page configuration
     st.set_page_config(page_title="Bean Disease Detector", page_icon=":seedling:", layout="wide")
 
-    # Background color using custom CSS
+    # Background image using custom CSS
     st.markdown(
-        """
+        f"""
         <style>
-            body {
-                background-color: #000; /* Set your desired background color */
+            .stApp {{
+                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/crop_health.jpg')}");  
                 background-size: cover;
-            }
+            }}
         </style>
         """,
         unsafe_allow_html=True,
@@ -82,7 +84,7 @@ def main():
         """,
         unsafe_allow_html=True
     )
-
+    
     # File uploader label text with white color
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], key="file_uploader")
 
@@ -95,27 +97,27 @@ def main():
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
         # Display image and classification
-        col1, col2 = st.columns([3, 1])
+        col1, col2 = st.columns([3, 1]) 
         with col1:
-            st.image(image_rgb, caption="Uploaded Image.", use_column_width=True, width=100)
-
+            st.image(image_rgb, caption="Uploaded Image.", use_column_width=True, width = 100)
+           
         with col2:
             st.markdown(
                 f"""
                 <style>
-                    body {{
-                        background-color: #000; /* Set your desired background color */
+                    .stApp {{
+                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/mossgreen.jpg')}");  
                         background-size: cover;
                     }}
                 </style>
                 """,
                 unsafe_allow_html=True,
             )
-
+            
             with st.spinner("Detecting..."):
                 prediction, confidence = classifier(image)
             st.success(f"Detection: {prediction} (Accuracy: {confidence:.2f}%)")
-
+            
             # Display dynamic description based on prediction
             if prediction in descriptions:
                 st.markdown(f"### Description:\n{descriptions[prediction]}")
