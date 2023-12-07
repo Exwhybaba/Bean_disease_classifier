@@ -58,9 +58,8 @@ def main():
     )
 
     # App title and description with blue color
-    st.markdown("<h1 style='color: blue;'>Bean Disease Detector</h1>", unsafe_allow_html=True)
-    st.markdown("## Upload an image.")
-
+    st.markdown("<h1 style='color: white;'>Bean Disease Detector</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: white;'>Upload an image.</h2>", unsafe_allow_html=True)
 
 
 
