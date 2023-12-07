@@ -12,7 +12,7 @@ import tempfile
 
 
 # Load the model
-model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/Imagemodel.h5'
+model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
 
 # download the model
 response = requests.get(model_url)
