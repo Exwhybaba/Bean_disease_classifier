@@ -7,12 +7,13 @@ import requests
 import tensorflow as tf
 import base64
 import tempfile
-from tensorflow.keras.models import load_model
+#from tensorflow.keras.models import load_model
 
 
 
-# Load the model using tf.keras.models.load_model
-loaded_model = load_model('./model/Imagemodel.h5')
+# Load the model 
+loaded_model = tf.keras.models.load_model('./model/Imagemodel.h5', custom_objects={'Adam': tf.keras.optimizers.Adam()})
+
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
