@@ -58,8 +58,20 @@ def main():
     )
 
     # App title and description with white color
-    st.title("<span style='color: white;'>Bean Disease Detector</span>")
-    st.markdown("<span style='color: white;'>## Upload an image.</span>")
+    st.title("Bean Disease Detector")
+    st.markdown("## Upload an image.")
+
+    # Apply white color using style method
+    st.markdown(
+        """
+        <style>
+            .css-1okv22p {
+                color: white;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     # File uploader
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
