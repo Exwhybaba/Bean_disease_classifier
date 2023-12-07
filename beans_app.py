@@ -90,7 +90,7 @@ def main():
     )
     
     # File uploader label text with white color
-    uploaded_file = st.file_uploader("<label class='css-qrbaxs effi0qh3'>Choose an image...</label>", type=["jpg", "jpeg", "png"], key="file_uploader")
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], key="file_uploader")
     
 
 
