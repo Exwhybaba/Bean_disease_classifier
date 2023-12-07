@@ -49,7 +49,7 @@ def main():
         f"""
         <style>
             .stApp {{
-                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/cowpea2.jpg')}");  
+                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/crop_health.jpg')}");  
                 background-size: cover;
             }}
         </style>
