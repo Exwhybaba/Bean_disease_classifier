@@ -12,7 +12,7 @@ import tempfile
 
 
 # Load the model 
-loaded_model = tf.keras.models.load_model('./model/Imagemodel.h5', custom_objects={'Adam': tf.keras.optimizers.Adam()})
+loaded_model = tf.keras.models.load_model('raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5', custom_objects={'Adam': tf.keras.optimizers.Adam()})
 
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
