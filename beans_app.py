@@ -7,19 +7,22 @@ import requests
 import tensorflow as tf
 import base64
 import tempfile
-#from tensorflow.keras.models import load_model
-
-
+from tensorflow.keras.models import load_model
 
 # Load the model
 model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
 
-# download the model
+# Download the model to a temporary file
 response = requests.get(model_url)
-model_content = response.content
+temp_model_file = tempfile.NamedTemporaryFile(delete=False)
+temp_model_file.write(response.content)
+temp_model_file.close()
 
-#load the model
-loaded_model = tf.keras.models.load_model(model_content, compile = False)
+# Load the model from the temporary file
+loaded_model = load_model(temp_model_file.name, compile=False)
+
+# Remove the temporary file
+temp_model_file.unlink()
 
 
 
