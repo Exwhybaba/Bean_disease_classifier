@@ -43,7 +43,7 @@ def apply_custom_styles(background_image):
         f"""
         <style>
             .custom-title {{
-                color: {title_color};
+                color: {title_color} !important;
                 margin-top: -45px;
             }}
         </style>
