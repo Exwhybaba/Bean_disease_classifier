@@ -11,13 +11,13 @@ from tensorflow.keras.models import load_model
 
 loaded_model = load_model('Imagemodel.h5', compile=False )
 
-encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
+#encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
 # Download the encoder file
-response = requests.get(encoder_url)
-encoder_content = response.content
+#response = requests.get(encoder_url)
+#encoder_content = response.content
 
 # Load the encoder
-encoder = pickle.loads(encoder_content)
+encoder = pickle.loads('encoder.sav')
 
 
     
