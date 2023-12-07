@@ -58,10 +58,22 @@ def main():
     )
 
     
-    # App title and description with white color and adjusted margin
-    st.markdown("<h1 style='color: white; margin-top: -45px;'>Bean Disease Detector</h1>", unsafe_allow_html=True)
+    # App title and description with blue color and adjusted margin for title
+    st.markdown("<h1 class='custom-title'>Bean Disease Detector</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='color: white; margin-top: -30px;'>Upload an image.</h2>", unsafe_allow_html=True)
 
+    # Apply custom styles using CSS
+    st.markdown(
+        """
+        <style>
+            .custom-title {
+                color: white;
+                margin-top: -45px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 
     # File uploader
