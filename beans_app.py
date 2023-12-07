@@ -58,22 +58,31 @@ def main():
     )
 
     
-    # App title and description with blue color and adjusted margin for title
-    st.markdown("<h1 class='custom-title'>Bean Disease Detector</h1>", unsafe_allow_html=True)
+    # Set a flag to check if the second background is applied
+    show_second_background = st.checkbox("Show Second Background")
+    
+    # Apply custom styles to the title based on the flag
+    if show_second_background:
+        title_color = "black"
+    else:
+        title_color = "white"
+    
+    # App title and description with dynamically set color
+    st.markdown(f"<h1 class='custom-title' style='color: {title_color};'>Bean Disease Detector</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='color: white; margin-top: -40px;'>Upload an image.</h2>", unsafe_allow_html=True)
-
+    
     # Apply custom styles using CSS
     st.markdown(
         """
         <style>
             .custom-title {
-                color: white;
                 margin-top: -45px;
             }
         </style>
         """,
         unsafe_allow_html=True
     )
+
 
 
     # Apply white color to the file uploader label text using CSS
