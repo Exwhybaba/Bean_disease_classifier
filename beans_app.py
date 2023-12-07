@@ -7,17 +7,21 @@ import requests
 import tensorflow as tf
 import base64
 import tempfile
+import joblib
 from tensorflow.keras.models import load_model
 
 loaded_model = load_model('Imagemodel.h5', compile=False )
 
-#encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
-# Download the encoder file
-#response = requests.get(encoder_url)
-#encoder_content = response.content
+
+
+encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
+response = requests.get(encoder_url)
+with open('encoder.sav', 'wb') as f:
+    f.write(response.content)
 
 # Load the encoder
-encoder = pickle.loads('encoder.sav')
+encoder = joblib.load('encoder.sav')
+
 
 
     
