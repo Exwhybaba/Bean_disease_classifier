@@ -60,7 +60,7 @@ def main():
     
     # App title and description with blue color and adjusted margin for title
     st.markdown("<h1 class='custom-title'>Bean Disease Detector</h1>", unsafe_allow_html=True)
-    st.markdown("<h2 style='color: white; margin-top: -30px;'>Upload an image.</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: white; margin-top: -40px;'>Upload an image.</h2>", unsafe_allow_html=True)
 
     # Apply custom styles using CSS
     st.markdown(
@@ -76,8 +76,20 @@ def main():
     )
 
 
-    # File uploader
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    # Apply white color to the file uploader button using CSS
+    st.markdown(
+        """
+        <style>
+            .css-17eq0hr {
+                color: white;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # File uploader with white color
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], key="file_uploader")
 
     # Display image and classification
     if uploaded_file is not None:
