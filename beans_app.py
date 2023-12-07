@@ -12,9 +12,8 @@ from tensorflow.keras.models import load_model
 loaded_model = load_model('Imagemodel.h5', compile=False )
 
 # Load the encoder
-encoder = pickle.load('encoder.sav')
-
-
+with open('encoder.sav', 'rb') as f:
+    encoder = pickle.load(f)
 
     
 # Descriptions for different predictions
