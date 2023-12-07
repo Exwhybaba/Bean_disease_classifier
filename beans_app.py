@@ -57,16 +57,17 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # App title and description with white color
+  # App title and description with white color and right alignment
     st.title("Bean Disease Detector")
     st.markdown("## Upload an image.")
 
-    # Apply white color using style method
+ # Apply white color and right alignment using style method
     st.markdown(
         """
         <style>
-            .css-1okv22p {
+            .st-bb {
                 color: white;
+                text-align: right;
             }
         </style>
         """,
