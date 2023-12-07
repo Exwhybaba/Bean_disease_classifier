@@ -76,20 +76,22 @@ def main():
     )
 
 
-    # Apply white color to the file uploader button using CSS
+    # Apply white color to the file uploader label using CSS
     st.markdown(
         """
         <style>
-            .css-17eq0hr {
-                color: white;
+            .css-qrbaxs {
+                color: white !important;
             }
         </style>
         """,
         unsafe_allow_html=True
     )
     
-    # File uploader with white color
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], key="file_uploader")
+    # File uploader label with white color
+    uploaded_file = st.file_uploader("<label class='css-qrbaxs effi0qh3'>Choose an image...</label>", type=["jpg", "jpeg", "png"], key="file_uploader")
+
+
 
     # Display image and classification
     if uploaded_file is not None:
