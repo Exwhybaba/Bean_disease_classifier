@@ -12,7 +12,7 @@ import tempfile
 
 
 # Load the model 
-loaded_model = tf.keras.models.load_model('https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5', compile = False)
+loaded_model = tf.keras.models.load_model('./model/Imagemodel.h5', compile = False)
 
 
 
