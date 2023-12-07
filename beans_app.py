@@ -9,34 +9,15 @@ import base64
 import tempfile
 from tensorflow.keras.models import load_model
 
-import streamlit as st
-import io
-import pickle
-import numpy as np
-import cv2
-import requests
-import tensorflow as tf
-import base64
-import tempfile
-from tensorflow.keras.models import load_model
-
 # Load the model
 model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
 
-# Download the model to a temporary file
+# Download the model 
 response = requests.get(model_url)
-temp_model_file = tempfile.NamedTemporaryFile(delete=False)
-temp_model_file.write(response.content)
-temp_model_file.close()
+response_content = response.content
 
-# Load the model from the temporary file
-loaded_model = load_model(temp_model_file.name, compile=False)
-
-# Remove the temporary file
-temp_model_file.unlink()
-
-# Rest of your code remains unchanged
-
+# Load the model 
+loaded_model = load_model(response_content , compile=False)
 
 
 
