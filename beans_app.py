@@ -58,21 +58,10 @@ def main():
     )
 
   # App title and description with white color and right alignment
-    st.title("Bean Disease Detector")
+    st.title(":white[Bean Disease Detector]")
     st.markdown("## Upload an image.")
 
- # Apply white color and right alignment using style method
-    st.markdown(
-        """
-        <style>
-            .st-bb {
-                color: white;
-                text-align: right;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+
 
     # File uploader
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
