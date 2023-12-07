@@ -11,8 +11,15 @@ import tempfile
 
 
 
-# Load the model 
-loaded_model = tf.keras.models.load_model('./model/Imagemodel.h5', compile = False)
+# Load the model
+model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/Imagemodel.h5'
+
+# download the model
+response = requests.get(model_url)
+model_content = response.content
+
+#load the model
+loaded_model = tf.keras.models.load_model(model_content, compile = False)
 
 
 
