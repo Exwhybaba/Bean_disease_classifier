@@ -12,7 +12,21 @@ import tempfile
 
 
 # Load the model 
-loaded_model = tf.keras.models.load_model('https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5', custom_objects={'Adam': tf.keras.optimizers.Adam()})
+#loaded_model = tf.keras.models.load_model('https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5')
+
+import urllib.request
+
+# URL of the model
+model_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/Imagemodel.h5'
+
+# Local path to save the downloaded model
+local_model_path = './model/Imagemodel.h5'
+
+# Download the model
+urllib.request.urlretrieve(model_url, local_model_path)
+
+# Load the model
+loaded_model = tf.keras.models.load_model(local_model_path, custom_objects={'Adam': tf.keras.optimizers.Adam()})
 
 
 encoder_url = 'https://raw.githubusercontent.com/Exwhybaba/Beans_disease_classifier/main/model/encoder.sav'
