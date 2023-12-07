@@ -58,8 +58,8 @@ def main():
     )
 
   # App title and description with white color and right alignment
-    st.title(':blue[Bean Disease Detector]')
-    st.markdown("## Upload an image.")
+   st.title("<span style='color: blue;'>Bean Disease Detector</span>", unsafe_allow_html=True)
+   st.markdown("## Upload an image.")
 
 
 
