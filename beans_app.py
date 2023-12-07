@@ -49,7 +49,7 @@ def main():
         f"""
         <style>
             .stApp {{
-                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('C:/Users/Administrator/Documents/Sandbox/pytouch/Bean/images/cowpea2.jpg')}");  
+                background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/cowpea2.jpg')}");  
                 background-size: cover;
             }}
         </style>
@@ -83,7 +83,7 @@ def main():
                 f"""
                 <style>
                     .stApp {{
-                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('C:/Users/Administrator/Documents/Sandbox/pytouch/Bean/images/mossgreen.jpg')}");  
+                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/mossgreen.jpg')}");  
                         background-size: cover;
                     }}
                 </style>
