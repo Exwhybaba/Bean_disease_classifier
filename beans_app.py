@@ -10,7 +10,10 @@ import tempfile
 from tensorflow.keras.models import load_model
 
 
-
+# Define your custom optimizer if needed
+class CustomAdam(tf.keras.optimizers.Adam):
+    # Define your custom optimizer properties/methods if needed
+    pass
 
 # Load the model using tf.keras.models.load_model
 loaded_model = load_model("model/Imagemodel.h5")
