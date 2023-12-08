@@ -106,7 +106,7 @@ def main():
                 f"""
                 <style>
                     .stApp {{
-                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/image.avi')}");  
+                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/blackPerfect.jpg)}");  
                         background-size: cover;
                     }}
                 </style>
