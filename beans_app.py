@@ -54,7 +54,11 @@ def main():
         """,
         unsafe_allow_html=True,
     )
-
+    
+    # App title and description with blue color and adjusted margin for title
+    st.markdown("<h1 class='custom-title'>Bean Disease Detector</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: black; margin-top: -40px;'>Upload an image.</h2>", unsafe_allow_html=True)
+    
     # Apply custom styles using CSS
     st.markdown(
         """
@@ -98,9 +102,7 @@ def main():
             st.image(image_rgb, caption="Uploaded Image.", use_column_width=True, width = 100)
            
         with col2:
-            # App title and description with blue color and adjusted margin for title
-            st.markdown("<h1 class='custom-title'>Bean Disease Detector</h1>", unsafe_allow_html=True)
-            st.markdown("<h2 style='color: black; margin-top: -40px;'>Upload an image.</h2>", unsafe_allow_html=True)
+            
             
             # Apply custom styles using CSS
             st.markdown(
