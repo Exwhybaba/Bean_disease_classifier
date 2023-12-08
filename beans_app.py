@@ -102,17 +102,17 @@ def main():
             st.image(image_rgb, caption="Uploaded Image.", use_column_width=True, width = 100)
            
         with col2:
-        st.markdown(
-            f"""
-            <style>
-                .stApp {{
-                    background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/blackPerfect.jpg')}");  
-                    background-size: cover;
-                }}
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+            st.markdown(
+                f"""
+                <style>
+                    .stApp {{
+                        background-image: url("data:image/jpeg;base64,{encode_image_as_base64('./images/blackPerfect.jpg')}");  
+                        background-size: cover;
+                    }}
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
 
             with st.spinner("Detecting..."):
                 prediction, confidence = classifier(image)
